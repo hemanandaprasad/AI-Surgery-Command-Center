@@ -1,8 +1,3 @@
-Sure Nandu 😎 – here’s a **ready-to-use README** for your **AI Emergency Surgery Command Center** project. You can create a `README.md` in your project root and paste this:
-
----
-
-```markdown
 # AI Emergency Surgery Command Center
 
 ## Overview
