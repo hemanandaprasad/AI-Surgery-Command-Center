@@ -75,13 +75,4 @@ mysql -u root -p < database/schema.sql
 
 ## Author
 
-**Hemananda Prasad**
-
-```
-
----
-
-Nandu, if you want, I can also make a **short 50-word version of README** specifically for your **review presentation**, so you can just read it aloud in 30–40 seconds.  
-
-Do you want me to do that?
-```
+**Hemananda Prasad **
