@@ -77,7 +77,7 @@ This ensures reliable and automated software delivery.
 The frontend dashboard is deployed using **Netlify**, which provides free hosting for static web applications.
 
 Live Website:
-https://projectbyhemananda.netlify.app
+https://hemananda.netlify.app/
 
 Whenever code is pushed to GitHub, Netlify automatically redeploys the website.
 
