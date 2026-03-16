@@ -1,13 +1,14 @@
 {
   "name": "ai-surgery-project",
   "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
+  "description": "AI Surgery Command Center Backend",
+  "main": "backend/server.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "node backend/server.js",
+    "test": "echo \"No tests specified\""
   },
-  "keywords": [],
-  "author": "",
+  "keywords": ["node", "express", "backend"],
+  "author": "Nandu",
   "license": "ISC",
   "dependencies": {
     "express": "^5.2.1"
