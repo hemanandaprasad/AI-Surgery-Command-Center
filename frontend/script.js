@@ -1,32 +1,152 @@
-// Example dynamic data
-const data = {
-    activeSurgeries: 8,
-    criticalPatients: 3,
-    scheduledSurgeries: 12,
-    performanceAnalytics: "AI efficiency: 95%",
-    alerts: [
-        { message: "Patient Hemananda has critical internal bleeding detected in OR 3.", time: "2 min ago" },
-        { message: "High-risk anesthesia level detected for Patient Akhil in OR 1.", time: "5 min ago" },
-        { message: "AI recommends urgent blood transfusion for Patient Geetha.", time: "10 min ago" }
-    ]
-};
+// AI Diagnosis simulation
 
-// Load data into dashboard
-document.getElementById('activeSurgeries').textContent = data.activeSurgeries;
-document.getElementById('criticalPatients').textContent = data.criticalPatients;
-document.getElementById('scheduledSurgeries').textContent = data.scheduledSurgeries;
-document.getElementById('performanceAnalytics').textContent = data.performanceAnalytics;
+const diagnoses = [
+"Internal bleeding detected",
+"Heart rate abnormal",
+"Oxygen level dropping",
+"AI recommends blood transfusion"
+];
 
-// Load alerts
-const alertsContainer = document.getElementById('alertsContainer');
-data.alerts.forEach(alert => {
-    const div = document.createElement('div');
-    div.classList.add('alert');
-    div.innerHTML = `<i class="fas fa-exclamation-triangle"></i><p>${alert.message}</p><span>${alert.time}</span>`;
-    alertsContainer.appendChild(div);
+let index = 0;
+
+setInterval(function(){
+
+document.getElementById("diagnosis").innerText =
+diagnoses[index];
+
+index++;
+
+if(index >= diagnoses.length){
+index = 0;
+}
+
+},3000);
+
+
+// Surgery countdown timer
+
+let time = 600;
+
+setInterval(function(){
+
+let minutes = Math.floor(time/60);
+let seconds = time % 60;
+
+if(seconds < 10){
+seconds = "0" + seconds;
+}
+
+document.getElementById("timer").innerText =
+minutes + ":" + seconds;
+
+if(time > 0){
+time--;
+}
+
+},1000);
+
+
+// AI efficiency simulation
+
+let efficiency = 95;
+
+setInterval(function(){
+
+efficiency = 90 + Math.random()*10;
+
+document.getElementById("efficiency").innerText =
+efficiency.toFixed(1) + "%";
+
+},2000);
+
+
+// Alerts simulation
+
+const alerts = [
+"Patient Hemananda internal bleeding detected",
+"Patient Akhil anesthesia risk high",
+"AI suggests urgent surgery",
+"Blood pressure dropping rapidly"
+];
+
+setInterval(function(){
+
+let alertBox = document.getElementById("alerts");
+
+let newAlert = document.createElement("p");
+
+newAlert.innerText =
+alerts[Math.floor(Math.random()*alerts.length)] +
+" - " + new Date().toLocaleTimeString();
+
+alertBox.prepend(newAlert);
+
+},4000);
+
+
+// ICU Vitals Graph using Chart.js
+
+const ctx = document.getElementById('vitalsChart').getContext('2d');
+
+let vitalsChart = new Chart(ctx,{
+type:'line',
+
+data:{
+labels:["1","2","3","4","5","6","7","8","9","10"],
+
+datasets:[{
+label:"Heart Rate",
+
+data:[72,75,73,76,74,77,78,76,75,74],
+
+borderColor:"#00ffcc",
+
+borderWidth:2,
+
+fill:false,
+
+tension:0.4
+}]
+},
+
+options:{
+responsive:true,
+
+plugins:{
+legend:{
+labels:{
+color:"white"
+}
+}
+},
+
+scales:{
+x:{
+ticks:{
+color:"white"
+}
+},
+
+y:{
+ticks:{
+color:"white"
+}
+}
+}
+}
 });
 
-// Hero button interaction
-document.getElementById('getStartedBtn').addEventListener('click', () => {
-    alert("Welcome to AI Surgery Command Center! Redirecting to dashboard...");
-});
+
+// simulate live heart rate updates
+
+setInterval(function(){
+
+let newRate = 70 + Math.random()*15;
+
+vitalsChart.data.datasets[0].data.push(newRate);
+
+vitalsChart.data.datasets[0].data.shift();
+
+vitalsChart.update();
+
+},2000);

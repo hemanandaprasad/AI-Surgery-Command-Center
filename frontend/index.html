@@ -1,76 +1,59 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AI Surgery Command Center</title>
-    <link rel="stylesheet" href="style.css">
-    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+<title>AI Emergency Surgery Command Center</title>
+<link rel="stylesheet" href="style.css">
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
+
 <body>
 
-    <!-- Header -->
-    <header>
-        <h1>AI Surgery Command Center</h1>
-        <nav>
-            <ul>
-                <li>Dashboard</li>
-                <li>Patients</li>
-                <li>Alerts</li>
-                <li>Analytics</li>
-                <li>Settings</li>
-            </ul>
-        </nav>
-    </header>
+<h1>🚨 AI Emergency Surgery Command Center</h1>
 
-    <!-- Hero Section -->
-    <div class="hero">
-        <h2>Advanced AI Surgery Monitoring for Multi-Specialty Hospitals</h2>
-        <p>Track real-time patient vitals, manage surgery schedules, and receive intelligent alerts to improve surgical outcomes and efficiency.</p>
-        <button id="getStartedBtn">Get Started</button>
-    </div>
+<div class="dashboard">
 
-    <!-- Dashboard Section -->
-    <section id="dashboard">
-        <h2 class="section-title">Dashboard Overview</h2>
-        <div class="cards">
-            <div class="card">
-                <i class="fas fa-procedures"></i>
-                <h3>Active Surgeries</h3>
-                <p id="activeSurgeries">Loading...</p>
-            </div>
-            <div class="card">
-                <i class="fas fa-user-injured"></i>
-                <h3>Critical Patients</h3>
-                <p id="criticalPatients">Loading...</p>
-            </div>
-            <div class="card">
-                <i class="fas fa-notes-medical"></i>
-                <h3>Scheduled Surgeries</h3>
-                <p id="scheduledSurgeries">Loading...</p>
-            </div>
-            <div class="card">
-                <i class="fas fa-chart-line"></i>
-                <h3>Performance Analytics</h3>
-                <p id="performanceAnalytics">Loading...</p>
-            </div>
-        </div>
-    </section>
+<div class="card">
+<h2>Patient</h2>
+<p>Hemananda</p>
+</div>
 
-    <!-- Alerts Section -->
-    <section id="alerts">
-        <h2 class="section-title">Critical Alerts</h2>
-        <div class="alerts" id="alertsContainer">
-            <!-- Alerts will load dynamically -->
-        </div>
-    </section>
+<div class="card">
+<h2>Status</h2>
+<p class="critical">CRITICAL</p>
+</div>
 
-    <!-- Footer -->
-    <footer>
-        <p>&copy; 2026 AI Surgery Command Center. All rights reserved.</p>
-    </footer>
+<div class="card">
+<h2>Surgery Countdown</h2>
+<p id="timer">10:00</p>
+</div>
 
-    <script src="script.js"></script>
+<div class="card">
+<h2>AI Diagnosis</h2>
+<p id="diagnosis">Analyzing patient vitals...</p>
+</div>
+
+<div class="card">
+<h2>AI Efficiency</h2>
+<p id="efficiency">95%</p>
+</div>
+
+</div>
+
+<h2>ECG Heartbeat Monitor</h2>
+
+<div class="ecg-container">
+<div id="ecg-line"></div>
+</div>
+
+<h2>Patient Vitals Monitor</h2>
+
+<canvas id="vitalsChart"></canvas>
+
+<h2>Critical Alerts</h2>
+
+<div id="alerts" class="alerts"></div>
+
+<script src="script.js"></script>
+
 </body>
 </html>
