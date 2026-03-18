@@ -1,15 +1,38 @@
-// Countdown timer
-let time = 600; // 10 minutes
+// SUBMIT FORM
+document.getElementById("patientForm").addEventListener("submit", async function(e) {
+  e.preventDefault();
 
-setInterval(function(){
-    let minutes = Math.floor(time/60);
-    let seconds = time%60;
-    if(seconds<10) seconds = "0"+seconds;
-    document.getElementById("timer").innerText = minutes + ":" + seconds;
-    time--;
-},1000);
+  const name = document.getElementById("name").value;
+  const age = document.getElementById("age").value;
+  const condition = document.getElementById("condition").value;
 
-// AI Diagnosis simulation
-setTimeout(function(){
-    document.getElementById("diagnosis").innerText = "AI Diagnosis: Internal bleeding detected. Immediate surgery required.";
-},3000);
+  await fetch("https://YOUR-RENDER-URL.onrender.com/add", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json"
+    },
+    body: JSON.stringify({ name, age, condition })
+  });
+
+  alert("Patient added!");
+});
+
+// 🔥 AUTO FETCH LATEST DATA EVERY 3 SECONDS
+async function loadLatest() {
+  const res = await fetch("https://YOUR-RENDER-URL.onrender.com/all");
+  const data = await res.json();
+
+  if (data.length > 0) {
+    const latest = data[data.length - 1];
+
+    document.querySelector(".patient-name").innerText = latest.name;
+    document.querySelector(".status").innerText = latest.status;
+    document.querySelector(".diagnosis").innerText = latest.diagnosis;
+  }
+}
+
+// Run every 3 sec
+setInterval(loadLatest, 3000);
+
+// Load once immediately
+loadLatest();

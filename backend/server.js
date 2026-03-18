@@ -1,31 +1,47 @@
-const express = require('express');
-const cors = require('cors');
-const app = express();
-const port = 3000;
+const express = require("express");
+const cors = require("cors");
+const mongoose = require("mongoose");
 
-// Middleware
+const app = express();
 app.use(cors());
 app.use(express.json());
 
-// Sample API for dashboard data
-app.get('/api/dashboard', (req, res) => {
-    res.json({
-        activeSurgeries: 8,
-        criticalPatients: 3,
-        scheduledSurgeries: 12,
-        performanceAnalytics: "AI efficiency: 95%"
-    });
+// 🔥 CONNECT MONGODB
+mongoose.connect("YOUR_MONGODB_URL")
+.then(() => console.log("MongoDB Connected"))
+.catch(err => console.log(err));
+
+// Schema
+const Patient = mongoose.model("Patient", {
+  name: String,
+  age: Number,
+  condition: String,
+  diagnosis: String,
+  status: String
 });
 
-// Sample API for alerts
-app.get('/api/alerts', (req, res) => {
-    res.json([
-        { message: "Patient Hemananda has critical internal bleeding detected in OR 3.", time: "2 min ago" },
-        { message: "High-risk anesthesia level detected for Patient Ramesh in OR 1.", time: "5 min ago" },
-        { message: "AI recommends urgent blood transfusion for Patient Sneha.", time: "10 min ago" }
-    ]);
+// ADD DATA
+app.post("/add", async (req, res) => {
+  const { name, age, condition } = req.body;
+
+  let diagnosis = "Stable";
+  let status = "Normal";
+
+  if (condition.toLowerCase().includes("bleeding")) {
+    diagnosis = "Internal bleeding detected";
+    status = "Critical";
+  }
+
+  const patient = new Patient({ name, age, condition, diagnosis, status });
+  await patient.save();
+
+  res.json(patient);
 });
 
-app.listen(port, () => {
-    console.log(`AI Surgery Command Center server running at http://localhost:${port}`);
+// GET ALL DATA (for proof)
+app.get("/all", async (req, res) => {
+  const data = await Patient.find();
+  res.json(data);
 });
+
+app.listen(3000, () => console.log("Server running"));

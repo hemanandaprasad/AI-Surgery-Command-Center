@@ -1,36 +1,77 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>AI Emergency Surgery Command Center</title>
-    <link rel="stylesheet" href="style.css">
+  <title>AI Surgery Command Center</title>
+  <style>
+    body {
+      background: black;
+      color: lime;
+      font-family: Arial;
+      text-align: center;
+    }
+
+    .ecg {
+      width: 100%;
+      height: 100px;
+      background: black;
+      position: relative;
+      overflow: hidden;
+      margin-top: 20px;
+    }
+
+    .line {
+      position: absolute;
+      width: 200%;
+      height: 2px;
+      background: lime;
+      animation: move 2s linear infinite;
+    }
+
+    @keyframes move {
+      from { left: 0; }
+      to { left: -100%; }
+    }
+
+    .live {
+      color: red;
+      font-weight: bold;
+      animation: blink 1s infinite;
+    }
+
+    @keyframes blink {
+      50% { opacity: 0; }
+    }
+  </style>
 </head>
+
 <body>
-    <h1>🚨 AI Emergency Surgery Command Center</h1>
 
-    <div class="dashboard">
-        <div class="panel">
-            <h2>Patient Case File</h2>
-            <p>Name: Hemananda</p>
-            <p>Age: 18</p>
-            <p>Status: Critical Trauma</p>
-        </div>
+<h1>🚨 AI Emergency Surgery Command Center</h1>
 
-        <div class="panel">
-            <h2>AI Diagnosis</h2>
-            <p id="diagnosis">Analyzing patient vitals...</p>
-        </div>
+<h2 class="live">🔴 LIVE MONITORING</h2>
 
-        <div class="panel">
-            <h2>ECG Monitor</h2>
-            <div class="ecg"></div>
-        </div>
+<div class="ecg">
+  <div class="line"></div>
+</div>
 
-        <div class="panel">
-            <h2>Surgery Countdown</h2>
-            <p id="timer">10:00</p>
-        </div>
-    </div>
+<h2>Patient Monitor</h2>
 
-    <script src="script.js"></script>
+<p>Patient: <span class="patient-name">---</span></p>
+<p>Status: <span class="status">---</span></p>
+<p>AI Diagnosis: <span class="diagnosis">---</span></p>
+
+<hr>
+
+<h2>Enter Patient Details</h2>
+
+<form id="patientForm">
+  <input id="name" placeholder="Name" required><br><br>
+  <input id="age" placeholder="Age" required><br><br>
+  <input id="condition" placeholder="Condition" required><br><br>
+  <button type="submit">Submit</button>
+</form>
+
+<script src="script.js"></script>
+
 </body>
 </html>
