@@ -6,12 +6,12 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 
-// 🔥 CONNECT MONGODB
+// 🔥 MONGODB CONNECTION
 mongoose.connect("YOUR_MONGODB_URL")
 .then(() => console.log("MongoDB Connected"))
 .catch(err => console.log(err));
 
-// Schema
+// SCHEMA
 const Patient = mongoose.model("Patient", {
   name: String,
   age: Number,
@@ -20,7 +20,7 @@ const Patient = mongoose.model("Patient", {
   status: String
 });
 
-// ADD DATA
+// 🔥 ADD PATIENT
 app.post("/add", async (req, res) => {
   const { name, age, condition } = req.body;
 
@@ -38,10 +38,11 @@ app.post("/add", async (req, res) => {
   res.json(patient);
 });
 
-// GET ALL DATA (for proof)
+// 🔥 GET ALL DATA
 app.get("/all", async (req, res) => {
   const data = await Patient.find();
   res.json(data);
 });
 
-app.listen(3000, () => console.log("Server running"));
+// START SERVER
+app.listen(3000, () => console.log("Server running on port 3000"));

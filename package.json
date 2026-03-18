@@ -7,10 +7,15 @@
     "start": "node backend/server.js",
     "test": "echo \"No tests specified\""
   },
-  "keywords": ["node", "express", "backend"],
+  "keywords": [
+    "node",
+    "express",
+    "backend"
+  ],
   "author": "Nandu",
   "license": "ISC",
   "dependencies": {
+    "cors": "^2.8.6",
     "express": "^5.2.1"
   }
 }

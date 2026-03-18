@@ -1,4 +1,11 @@
-// SUBMIT FORM
+// 🔊 VOICE FUNCTION
+function speak(text) {
+  const speech = new SpeechSynthesisUtterance(text);
+  speech.lang = "en-US";
+  window.speechSynthesis.speak(speech);
+}
+
+// 🔥 SUBMIT FORM
 document.getElementById("patientForm").addEventListener("submit", async function(e) {
   e.preventDefault();
 
@@ -14,10 +21,23 @@ document.getElementById("patientForm").addEventListener("submit", async function
     body: JSON.stringify({ name, age, condition })
   });
 
-  alert("Patient added!");
+  speak("Patient data recorded");
 });
 
-// 🔥 AUTO FETCH LATEST DATA EVERY 3 SECONDS
+// 🔥 AI RISK LOGIC
+function calculateRisk(condition) {
+  condition = condition.toLowerCase();
+
+  if (condition.includes("bleeding")) return 95;
+  if (condition.includes("heart")) return 90;
+  if (condition.includes("accident")) return 85;
+  if (condition.includes("fracture")) return 60;
+  if (condition.includes("fever")) return 30;
+
+  return 10;
+}
+
+// 🔥 LOAD DATA
 async function loadLatest() {
   const res = await fetch("https://YOUR-RENDER-URL.onrender.com/all");
   const data = await res.json();
@@ -28,11 +48,19 @@ async function loadLatest() {
     document.querySelector(".patient-name").innerText = latest.name;
     document.querySelector(".status").innerText = latest.status;
     document.querySelector(".diagnosis").innerText = latest.diagnosis;
+
+    const risk = calculateRisk(latest.condition);
+    document.getElementById("riskBar").value = risk;
+    document.getElementById("riskText").innerText = risk + "%";
+
+    if (risk > 80) {
+      speak("Critical condition detected");
+    } else if (risk > 50) {
+      speak("Patient needs attention");
+    }
   }
 }
 
-// Run every 3 sec
+// AUTO REFRESH
 setInterval(loadLatest, 3000);
-
-// Load once immediately
 loadLatest();
